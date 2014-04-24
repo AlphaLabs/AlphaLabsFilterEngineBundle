@@ -19,7 +19,7 @@
     },
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "AlphaLabs\\Bundle\\FilterEngineBundle\\": "src/" }
+        "psr-4": { "AlphaLabs\\Bundle\\FilterEngineBundle\\": "" }
     },
     "extra": {
         "branch-alias": {

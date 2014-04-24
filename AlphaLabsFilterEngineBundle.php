@@ -12,7 +12,8 @@ class AlphaLabsFilterEngineBundle extends Bundle
     /**
      * {@inheritDoc}
      */
-    public function getContainerExtension() {
+    public function getContainerExtension()
+    {
         if (null === $this->extension) {
             $this->extension = new AlphaLabsFilterEngineExtension();
         }
