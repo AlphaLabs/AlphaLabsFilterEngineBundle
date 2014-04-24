@@ -1,0 +1,29 @@
+{
+    "name": "alphalabs/filter-engine-bundle",
+    "description": "Symfony2 bundle useful to alter Doctrine queries based on filter expression",
+    "keywords": ["filter", "doctrine", "expression", "bundle", "request"],
+    "type": "bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sylvain Mauduit",
+            "email": "swop@swop.io"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.4",
+        "symfony/symfony": "~2.4",
+        "sensio/framework-extra-bundle": "~3.0",
+        "alphalabs/filter-engine": "1.0.*@dev"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "AlphaLabs\\Bundle\\FilterEngineBundle\\": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

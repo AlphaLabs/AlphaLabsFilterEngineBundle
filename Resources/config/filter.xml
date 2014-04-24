@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="alphalabs_filter_engine.filter_bag.factory.default.class">AlphaLabs\FilterEngine\FilterBag\Factory\DefaultFilterBagFactory</parameter>
+        <parameter key="alphalabs_filter_engine.filter_bag.factory.request_based.class">AlphaLabs\FilterEngine\FilterBag\Factory\RequestBasedFilterBagFactory</parameter>
+        <parameter key="alphalabs_filter_engine.filter_bag.factory.chained.class">AlphaLabs\FilterEngine\FilterBag\Factory\ChainedFilterBagFactory</parameter>
+        <parameter key="alphalabs_filter_engine.filter_bag.provider.class">AlphaLabs\FilterEngine\Provider\FilterBagProvider</parameter>
+        <parameter key="alphalabs_filter_engine.filter_bag.converter.class">AlphaLabs\Bundle\FilterEngineBundle\ParamConverter\FilterBagConverter</parameter>
+    </parameters>
+
+    <services>
+        <service id="alphalabs_filter_engine.filter_bag.factory.default"
+                 class="%alphalabs_filter_engine.filter_bag.factory.default.class%">
+            <tag name="alphalabs_filter_engine.factory" priority="1" />
+        </service>
+
+        <service id="alphalabs_filter_engine.filter_bag.factory.request_based"
+                 class="%alphalabs_filter_engine.filter_bag.factory.request_based.class%">
+            <argument type="service" id="request_stack" />
+            <argument /><!-- filterKey -->
+            <tag name="alphalabs_filter_engine.factory" priority="10" />
+        </service>
+
+        <service id="alphalabs_filter_engine.filter_bag.factory.chained"
+                 class="%alphalabs_filter_engine.filter_bag.factory.chained.class%" />
+
+        <service id="alphalabs_filter_engine.filter_bag.provider"
+                 class="%alphalabs_filter_engine.filter_bag.provider.class%">
+            <argument type="service" id="alphalabs_filter_engine.filter_bag.factory.chained" />
+        </service>
+
+        <service id="alphalabs_filter_engine.filter_bag.converter"
+                 class="%alphalabs_filter_engine.filter_bag.converter.class%">
+            <call method="setFilterBagProviderProvider">
+                <argument type="service" id="alphalabs_filter_engine.filter_bag.provider" />
+            </call>
+            <tag name="request.param_converter" priority="10" converter="filter_bag" />
+        </service>
+    </services>
+</container>
